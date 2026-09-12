@@ -10,3 +10,5 @@ services:
         value: 10000
       - key: NODE_ENV
         value: production
+      - key: CLIENT_URL
+        value: https://candid-blini-a204dd.netlify.app

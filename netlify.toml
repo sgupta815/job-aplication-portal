@@ -5,7 +5,7 @@
 
 [[redirects]]
   from   = "/api/*"
-  to     = "https://your-render-api-url.onrender.com/api/:splat"
+  to     = "https://job-aplication-portal-1.onrender.com/api/:splat"
   status = 200
   force  = true
 
