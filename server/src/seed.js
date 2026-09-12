@@ -1,7 +1,6 @@
-import { connectDB } from "./config/db.js";
 import { Job } from "./models/Job.js";
 
-const jobs = [
+const JOBS = [
   {
     externalId: "job-1",
     title: "Frontend Developer",
@@ -66,21 +65,17 @@ const jobs = [
   }
 ];
 
-try {
-  await connectDB();
-
-  for (const job of jobs) {
+/**
+ * Seeds jobs into the DB if they don't already exist.
+ * Safe to call on every server start — uses upsert so existing data is never overwritten.
+ */
+export async function seedJobs() {
+  for (const job of JOBS) {
     await Job.findOneAndUpdate(
       { externalId: job.externalId },
       job,
       { upsert: true, new: true }
     );
   }
-
-  console.log(`Seeded ${jobs.length} jobs.`);
-} catch (err) {
-  console.error("Seed failed:", err.message);
-  process.exit(1);
+  console.log(`Seeded ${JOBS.length} jobs.`);
 }
-
-process.exit(0);
